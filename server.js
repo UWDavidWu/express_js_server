@@ -41,3 +41,11 @@ app.get("/everything/:query/:page", (req, res) => {
         .then(response => res.send(response.data))
         .catch(error => res.status(500).send(error));
 });
+
+app.get('/test', (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    axios
+        .get("https://jsonplaceholder.typicode.com/todos/1")
+        .then(response => res.send(response.data))
+        .catch(error => res.status(500).send(error));
+});
