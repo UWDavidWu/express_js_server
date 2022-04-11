@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 
 const app = express();
 
@@ -10,6 +11,16 @@ const pageSize = 12;
 app.listen(port, () => {
     console.log(`Example app listening on ${port} 5000!`);
 });
+
+if (process.env.Node_ENV === 'production') {
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+    });
+}
+
+
 
 
 app.get("/headlines/:country/:page", (req, res) => {
